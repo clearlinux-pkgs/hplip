@@ -1,0 +1,2 @@
+rm  prnt/hpcups/*.so ||:
+rm prnt/plugins/*.so || :

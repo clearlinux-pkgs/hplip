@@ -1,0 +1,25 @@
+Configure miss: hpijs only build
+Configure miss: lite build
+Configure miss: hpcups only build
+Configure miss: hpijs install
+Configure miss: new hpcups install
+Configure miss: parallel port build
+Configure miss: class driver
+Configure miss: apparmor profile
+Configure miss: cups 1.1.x build
+Configure miss: udev sysfs enable rules
+Configure miss: shadow build
+Configure miss: libusb-0.1 build
+Configure miss: foomatic ppd install
+Configure miss: foomatic drv install
+Configure miss: cups ppd install
+Configure miss: foomatic-rip-hplip install
+Configure miss: qt5
+Configure miss: qt3
+Configure miss: policykit
+Configure miss: python3.7/Python.h usability
+Configure miss: python3.7/Python.h presence
+Configure miss: python3.7/Python.h
+Configure miss: python3.7mu/Python.h usability
+Configure miss: python3.7mu/Python.h presence
+Configure miss: python3.7mu/Python.h

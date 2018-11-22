@@ -1,0 +1,4 @@
+#cp prnt/hpcups/libImageProcessor-x86_64.so %{buildroot}/usr/lib64/ 
+#chmod 775 %{buildroot}/usr/lib64/libImageProcessor-x86_64.so
+#ln -sf libImageProcessor-x86_64.so %{buildroot}/usr/lib64/libImageProcessor.so
+

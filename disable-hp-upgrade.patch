@@ -1,0 +1,16 @@
+Index: b/upgrade.py
+===================================================================
+--- a/upgrade.py
++++ b/upgrade.py
+@@ -207,6 +207,11 @@ if os.geteuid() == 0:
+ if os.getenv("HPLIP_DEBUG"):
+     log.set_level('debug')
+ 
++
++log.error("HPLIP upgrade is disabled by Clear Linux. To upgrade, please use swupd.")
++clean_exit(1)
++
++
+ for o, a in opts:
+     if o in ('-h', '--help'):
+         usage()

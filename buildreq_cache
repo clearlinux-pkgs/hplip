@@ -1,0 +1,7 @@
+3.18.6
+buildreq-kde
+libjpeg-turbo-dev
+openssl-dev
+pkgconfig(zlib)
+python3-dev
+zlib-dev
