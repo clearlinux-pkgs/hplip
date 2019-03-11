@@ -6,11 +6,11 @@
 #
 Name     : hplip
 Version  : 3.18.6
-Release  : 8
+Release  : 12
 URL      : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source0  : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source99 : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz.asc
-Summary  : Drivers for HP DeskJet, OfficeJet, Photosmart, Business Inkjet and some LaserJet
+Summary  : HPLIP
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: hplip-bin = %{version}-%{release}
@@ -35,6 +35,7 @@ BuildRequires : sane-backends-dev
 BuildRequires : zlib-dev
 Patch1: disable-hp-upgrade.patch
 Patch2: no-systray-failure.patch
+Patch3: 0001-More-stateless-support-for-hplip.patch
 
 %description
 The Independent JPEG Group's JPEG software
@@ -127,6 +128,7 @@ services components for the hplip package.
 %setup -q -n hplip-3.18.6
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 ## build_prepend content
@@ -137,7 +139,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1550425582
+export SOURCE_DATE_EPOCH=1552341392
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -149,12 +152,16 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1550425582
+export SOURCE_DATE_EPOCH=1552341392
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/hplip
 cp COPYING %{buildroot}/usr/share/package-licenses/hplip/COPYING
 cp copyright %{buildroot}/usr/share/package-licenses/hplip/copyright
 %make_install
+## install_append content
+mkdir -p %{buildroot}/usr/share/defaults/etc/hp
+install -m0644 hplip.conf %{buildroot}/usr/share/defaults/etc/hp/hplip.conf
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -210,6 +217,7 @@ cp copyright %{buildroot}/usr/share/package-licenses/hplip/copyright
 /usr/share/cups/drv/hp/hpcups.drv
 /usr/share/cups/mime/pstotiff.convs
 /usr/share/cups/mime/pstotiff.types
+/usr/share/defaults/etc/hp/hplip.conf
 /usr/share/hal/fdi/preprobe/10osvendor/20-hplip-devices.fdi
 /usr/share/hplip/__init__.py
 /usr/share/hplip/align.py

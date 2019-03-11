@@ -1,0 +1,44 @@
+From a767988e9e38f08979f50bbf6558493e205ea232 Mon Sep 17 00:00:00 2001
+From: Auke Kok <auke-jan.h.kok@intel.com>
+Date: Mon, 11 Mar 2019 14:25:38 -0700
+Subject: [PATCH] More stateless support for hplip.
+
+---
+ base/g.py      | 5 ++++-
+ base/models.py | 4 +++-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/base/g.py b/base/g.py
+index f73e23f..69d3f10 100644
+--- a/base/g.py
++++ b/base/g.py
+@@ -182,7 +182,10 @@ class ConfigBase(object):
+         
+ class SysConfig(ConfigBase):
+     def __init__(self):
+-        ConfigBase.__init__(self, '/etc/hp/hplip.conf')
++        if os.path.isfile('/etc/hp/hplip.conf'):
++            ConfigBase.__init__(self, '/etc/hp/hplip.conf')
++        else:
++            ConfigBase.__init__(self, '/usr/share/defaults/etc/hp/hplip.conf')
+ 
+ 
+ class State(ConfigBase):
+diff --git a/base/models.py b/base/models.py
+index 5493447..45a9d4b 100644
+--- a/base/models.py
++++ b/base/models.py
+@@ -329,7 +329,9 @@ class ModelData:
+         files = [(os.path.join(self.root_path, "models.dat"),
+                   os.path.join(self.root_path, "unreleased", "unreleased.dat")),
+                  (os.path.join(os.getcwd(), 'data', 'models', 'models.dat'),
+-                  os.path.join(os.getcwd(), 'data', 'models', 'unreleased', 'unreleased.dat'))]
++                  os.path.join(os.getcwd(), 'data', 'models', 'unreleased', 'unreleased.dat')),
++                 (os.path.join('/usr', 'share', 'hplip', 'data', 'models', 'models.dat'),
++                  os.path.join('/usr', 'share', 'hplip', 'data', 'unreleased', 'unreleased.dat'))]
+ 
+         for self.released_dat, self.unreleased_dat in files:
+             if os.path.exists(self.released_dat):
+-- 
+2.20.1
+

@@ -1,2 +1,3 @@
 disable-hp-upgrade.patch
 no-systray-failure.patch
+0001-More-stateless-support-for-hplip.patch
