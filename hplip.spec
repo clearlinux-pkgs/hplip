@@ -6,11 +6,11 @@
 #
 Name     : hplip
 Version  : 3.18.6
-Release  : 13
+Release  : 14
 URL      : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source0  : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source99 : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz.asc
-Summary  : HPLIP
+Summary  : Drivers for HP DeskJet, OfficeJet, Photosmart, Business Inkjet and some LaserJet
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: hplip-bin = %{version}-%{release}
@@ -35,7 +35,7 @@ BuildRequires : sane-backends-dev
 BuildRequires : zlib-dev
 Patch1: disable-hp-upgrade.patch
 Patch2: no-systray-failure.patch
-Patch3: 0001-More-stateless-support-for-hplip.patch
+Patch3: 0001-Stateless-support-for-hplip.patch.txt
 
 %description
 The Independent JPEG Group's JPEG software
@@ -67,6 +67,7 @@ Requires: hplip-lib = %{version}-%{release}
 Requires: hplip-bin = %{version}-%{release}
 Requires: hplip-data = %{version}-%{release}
 Provides: hplip-devel = %{version}-%{release}
+Requires: hplip = %{version}-%{release}
 
 %description dev
 dev components for the hplip package.
@@ -139,8 +140,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552341392
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1556461406
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -152,7 +152,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1552341392
+export SOURCE_DATE_EPOCH=1556461406
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/hplip
 cp COPYING %{buildroot}/usr/share/package-licenses/hplip/COPYING
