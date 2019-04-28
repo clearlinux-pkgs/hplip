@@ -1,0 +1,55 @@
+From 527a2168ffdd23f1f8a0555547d8ee98444d02e2 Mon Sep 17 00:00:00 2001
+From: Peter Ceiley <peter@ceiley.net>
+Date: Sun, 28 Apr 2019 10:01:02 +1000
+Subject: [PATCH] Stateless support for hplip.
+
+---
+ base/g.py    | 5 ++++-
+ prnt/cups.py | 8 ++++++--
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/base/g.py b/base/g.py
+index f73e23f..69d3f10 100644
+--- a/base/g.py
++++ b/base/g.py
+@@ -182,7 +182,10 @@ class ConfigBase(object):
+         
+ class SysConfig(ConfigBase):
+     def __init__(self):
+-        ConfigBase.__init__(self, '/etc/hp/hplip.conf')
++        if os.path.isfile('/etc/hp/hplip.conf'):
++            ConfigBase.__init__(self, '/etc/hp/hplip.conf')
++        else:
++            ConfigBase.__init__(self, '/usr/share/defaults/etc/hp/hplip.conf')
+ 
+ 
+ class State(ConfigBase):
+diff --git a/prnt/cups.py b/prnt/cups.py
+index fc90e45..5968317 100644
+--- a/prnt/cups.py
++++ b/prnt/cups.py
+@@ -191,7 +191,11 @@ def isfamilydrv(ppds):
+      #   for m in models.FAMILY_CLASSES:
+       #       if m in f:
+        #          family_check=1
+-    filename_config = "/etc/hp/hplip.conf"
++    if os.path.isfile('/etc/hp/hplip.conf'):
++        filename_config = "/etc/hp/hplip.conf"
++    else:
++        filename_config = "/usr/share/defaults/etc/hp/hplip.conf"
++
+     file_conf = open(filename_config,'r')
+     for line in file_conf:
+         if 'class-driver' in line:
+@@ -212,7 +216,7 @@ def getPPDPath(addtional_paths=None):
+     search_paths = prop.ppd_search_path.split(';') + addtional_paths
+ 
+     for path in search_paths:
+-        ppd_path = os.path.join(path, 'cups/model')
++        ppd_path = os.path.join(path, 'cups/drv')
+         if os.path.exists(ppd_path):
+             return ppd_path
+ 
+-- 
+2.21.0
+
