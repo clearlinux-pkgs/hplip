@@ -1,12 +1,13 @@
-From a767988e9e38f08979f50bbf6558493e205ea232 Mon Sep 17 00:00:00 2001
-From: Auke Kok <auke-jan.h.kok@intel.com>
-Date: Mon, 11 Mar 2019 14:25:38 -0700
-Subject: [PATCH] More stateless support for hplip.
+From e7e087c775db9734e6f7fcce997d59dc545a0ca2 Mon Sep 17 00:00:00 2001
+From: Peter Ceiley <peter@ceiley.net>
+Date: Fri, 3 May 2019 23:05:49 +1000
+Subject: [PATCH] Add stateless support to hplip
 
 ---
- base/g.py      | 5 ++++-
- base/models.py | 4 +++-
- 2 files changed, 7 insertions(+), 2 deletions(-)
+ base/g.py        | 5 ++++-
+ io/hpmud/model.c | 7 +++++--
+ prnt/cups.py     | 8 ++++++--
+ 3 files changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/base/g.py b/base/g.py
 index f73e23f..69d3f10 100644
@@ -24,21 +25,50 @@ index f73e23f..69d3f10 100644
  
  
  class State(ConfigBase):
-diff --git a/base/models.py b/base/models.py
-index 5493447..45a9d4b 100644
---- a/base/models.py
-+++ b/base/models.py
-@@ -329,7 +329,9 @@ class ModelData:
-         files = [(os.path.join(self.root_path, "models.dat"),
-                   os.path.join(self.root_path, "unreleased", "unreleased.dat")),
-                  (os.path.join(os.getcwd(), 'data', 'models', 'models.dat'),
--                  os.path.join(os.getcwd(), 'data', 'models', 'unreleased', 'unreleased.dat'))]
-+                  os.path.join(os.getcwd(), 'data', 'models', 'unreleased', 'unreleased.dat')),
-+                 (os.path.join('/usr', 'share', 'hplip', 'data', 'models', 'models.dat'),
-+                  os.path.join('/usr', 'share', 'hplip', 'data', 'unreleased', 'unreleased.dat'))]
+diff --git a/io/hpmud/model.c b/io/hpmud/model.c
+index 4ea8990..e5e3b5f 100644
+--- a/io/hpmud/model.c
++++ b/io/hpmud/model.c
+@@ -105,8 +105,11 @@ static int ReadConfig()
+         
+    if((inFile = fopen(CONFDIR "/hplip.conf", "r")) == NULL) 
+    {
+-      BUG("unable to open %s: %m\n", CONFDIR "/hplip.conf");
+-      goto bugout;
++      if((inFile = fopen("/usr/share/defaults/etc/hp/hplip.conf", "r")) == NULL) 
++      {
++         BUG("unable to open %s: %m\n", "/usr/share/defaults/etc/hp/hplip.conf");
++         goto bugout;
++      }
+    } 
  
-         for self.released_dat, self.unreleased_dat in files:
-             if os.path.exists(self.released_dat):
+    section[0] = 0;
+diff --git a/prnt/cups.py b/prnt/cups.py
+index fc90e45..5968317 100644
+--- a/prnt/cups.py
++++ b/prnt/cups.py
+@@ -191,7 +191,11 @@ def isfamilydrv(ppds):
+      #   for m in models.FAMILY_CLASSES:
+       #       if m in f:
+        #          family_check=1
+-    filename_config = "/etc/hp/hplip.conf"
++    if os.path.isfile('/etc/hp/hplip.conf'):
++        filename_config = "/etc/hp/hplip.conf"
++    else:
++        filename_config = "/usr/share/defaults/etc/hp/hplip.conf"
++
+     file_conf = open(filename_config,'r')
+     for line in file_conf:
+         if 'class-driver' in line:
+@@ -212,7 +216,7 @@ def getPPDPath(addtional_paths=None):
+     search_paths = prop.ppd_search_path.split(';') + addtional_paths
+ 
+     for path in search_paths:
+-        ppd_path = os.path.join(path, 'cups/model')
++        ppd_path = os.path.join(path, 'cups/drv')
+         if os.path.exists(ppd_path):
+             return ppd_path
+ 
 -- 
-2.20.1
+2.21.0
 
