@@ -6,7 +6,7 @@
 #
 Name     : hplip
 Version  : 3.18.6
-Release  : 16
+Release  : 17
 URL      : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source0  : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source99 : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz.asc
