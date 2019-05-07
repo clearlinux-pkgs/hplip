@@ -6,11 +6,11 @@
 #
 Name     : hplip
 Version  : 3.18.6
-Release  : 18
+Release  : 19
 URL      : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source0  : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source99 : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz.asc
-Summary  : Drivers for HP DeskJet, OfficeJet, Photosmart, Business Inkjet and some LaserJet
+Summary  : HPLIP
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: hplip-bin = %{version}-%{release}
@@ -33,9 +33,9 @@ BuildRequires : pkgconfig(zlib)
 BuildRequires : python3-dev
 BuildRequires : sane-backends-dev
 BuildRequires : zlib-dev
-Patch1: disable-hp-upgrade.patch
-Patch2: no-systray-failure.patch
-Patch3: 0001-Stateless-support-for-hplip.patch.txt
+Patch1: 0001-More-stateless-support-for-hplip.patch
+Patch2: disable-hp-upgrade.patch
+Patch3: no-systray-failure.patch
 
 %description
 The Independent JPEG Group's JPEG software
@@ -140,7 +140,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1556461406
+export SOURCE_DATE_EPOCH=1557207404
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -152,7 +153,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1556461406
+export SOURCE_DATE_EPOCH=1557207404
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/hplip
 cp COPYING %{buildroot}/usr/share/package-licenses/hplip/COPYING
