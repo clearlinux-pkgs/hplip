@@ -6,7 +6,7 @@
 #
 Name     : hplip
 Version  : 3.18.6
-Release  : 19
+Release  : 20
 URL      : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source0  : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz
 Source99 : https://sourceforge.net/projects/hplip/files/hplip/3.18.6/hplip-3.18.6.tar.gz.asc
@@ -24,6 +24,7 @@ Requires: dbus-python
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-kde
 BuildRequires : cups-dev
+BuildRequires : dbus-python
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : libusb-dev
 BuildRequires : net-snmp-dev
@@ -140,8 +141,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557207404
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1559846606
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -153,7 +158,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557207404
+export SOURCE_DATE_EPOCH=1559846606
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/hplip
 cp COPYING %{buildroot}/usr/share/package-licenses/hplip/COPYING
@@ -162,6 +167,8 @@ cp copyright %{buildroot}/usr/share/package-licenses/hplip/copyright
 ## install_append content
 mkdir -p %{buildroot}/usr/share/defaults/etc/hp
 install -m0644 hplip.conf %{buildroot}/usr/share/defaults/etc/hp/hplip.conf
+mkdir -p %{buildroot}/usr/share/defaults/sane/dll.d
+echo hpaio > %{buildroot}/usr/share/defaults/sane/dll.d/hpaio
 ## install_append end
 
 %files
@@ -219,6 +226,7 @@ install -m0644 hplip.conf %{buildroot}/usr/share/defaults/etc/hp/hplip.conf
 /usr/share/cups/mime/pstotiff.convs
 /usr/share/cups/mime/pstotiff.types
 /usr/share/defaults/etc/hp/hplip.conf
+/usr/share/defaults/sane/dll.d/hpaio
 /usr/share/hal/fdi/preprobe/10osvendor/20-hplip-devices.fdi
 /usr/share/hplip/__init__.py
 /usr/share/hplip/align.py

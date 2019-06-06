@@ -4,3 +4,5 @@
 
 mkdir -p %{buildroot}/usr/share/defaults/etc/hp
 install -m0644 hplip.conf %{buildroot}/usr/share/defaults/etc/hp/hplip.conf
+mkdir -p %{buildroot}/usr/share/defaults/sane/dll.d
+echo hpaio > %{buildroot}/usr/share/defaults/sane/dll.d/hpaio
