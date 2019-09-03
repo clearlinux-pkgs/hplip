@@ -1,0 +1,2 @@
+--disable-qt4
+--enable-qt5

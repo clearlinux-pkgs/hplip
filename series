@@ -1,3 +1,4 @@
 0001-More-stateless-support-for-hplip.patch
 disable-hp-upgrade.patch
 no-systray-failure.patch
+0025-Remove-all-ImageProcessor-functionality-which-is-clo.patch

@@ -1,2 +1,1 @@
-rm  prnt/hpcups/*.so ||:
-rm prnt/plugins/*.so || :
+sed -i 's|^AM_INIT_AUTOMAKE|AM_INIT_AUTOMAKE([foreign])|g' configure.in

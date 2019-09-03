@@ -4,3 +4,6 @@ net-snmp-dev
 cups-dev
 libusb-dev
 sane-backends-dev
+PyQt5
+sip
+dbus-python

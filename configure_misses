@@ -14,7 +14,7 @@ Configure miss: foomatic ppd install
 Configure miss: foomatic drv install
 Configure miss: cups ppd install
 Configure miss: foomatic-rip-hplip install
-Configure miss: qt5
+Configure miss: qt4
 Configure miss: qt3
 Configure miss: policykit
 Configure miss: python3.7/Python.h usability
