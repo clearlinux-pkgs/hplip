@@ -4,7 +4,7 @@
 #
 Name     : hplip
 Version  : 3.19.8.reduced
-Release  : 24
+Release  : 25
 URL      : http://localhost/cgit/projects/hplip/snapshot/hplip-3.19.8.reduced.tar.xz
 Source0  : http://localhost/cgit/projects/hplip/snapshot/hplip-3.19.8.reduced.tar.xz
 Summary  : HPLIP
@@ -135,6 +135,7 @@ services components for the hplip package.
 
 %prep
 %setup -q -n hplip-3.19.8.reduced
+cd %{_builddir}/hplip-3.19.8.reduced
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -142,13 +143,15 @@ services components for the hplip package.
 
 %build
 ## build_prepend content
+export CFLAGS="$CFLAGS $(python3-config --includes)"
+export CXXFLAGS="$CXXFLAGS $(python3-config --includes)"
 sed -i 's|^AM_INIT_AUTOMAKE|AM_INIT_AUTOMAKE([foreign])|g' configure.in
 ## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1567536131
+export SOURCE_DATE_EPOCH=1576006733
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -166,13 +169,17 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1567536131
+export SOURCE_DATE_EPOCH=1576006733
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/hplip
-cp COPYING %{buildroot}/usr/share/package-licenses/hplip/COPYING
-cp copyright %{buildroot}/usr/share/package-licenses/hplip/copyright
+cp %{_builddir}/hplip-3.19.8.reduced/COPYING %{buildroot}/usr/share/package-licenses/hplip/1424fcfa87a00f99343d19aad0a74293dea0a023
+cp %{_builddir}/hplip-3.19.8.reduced/copyright %{buildroot}/usr/share/package-licenses/hplip/1294a894afcadcd3e48d37df2e2945c2f0228dac
 %make_install
 ## install_append content
+#cp prnt/hpcups/libImageProcessor-x86_64.so %{buildroot}/usr/lib64/
+#chmod 775 %{buildroot}/usr/lib64/libImageProcessor-x86_64.so
+#ln -sf libImageProcessor-x86_64.so %{buildroot}/usr/lib64/libImageProcessor.so
+
 mkdir -p %{buildroot}/usr/share/defaults/etc/hp
 install -m0644 hplip.conf %{buildroot}/usr/share/defaults/etc/hp/hplip.conf
 mkdir -p %{buildroot}/usr/share/defaults/sane/dll.d
@@ -2027,8 +2034,8 @@ echo hpaio > %{buildroot}/usr/share/defaults/sane/dll.d/hpaio
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/hplip/COPYING
-/usr/share/package-licenses/hplip/copyright
+/usr/share/package-licenses/hplip/1294a894afcadcd3e48d37df2e2945c2f0228dac
+/usr/share/package-licenses/hplip/1424fcfa87a00f99343d19aad0a74293dea0a023
 
 %files python
 %defattr(-,root,root,-)

@@ -17,9 +17,4 @@ Configure miss: foomatic-rip-hplip install
 Configure miss: qt4
 Configure miss: qt3
 Configure miss: policykit
-Configure miss: python3.7/Python.h usability
-Configure miss: python3.7/Python.h presence
-Configure miss: python3.7/Python.h
-Configure miss: python3.7mu/Python.h usability
-Configure miss: python3.7mu/Python.h presence
-Configure miss: python3.7mu/Python.h
+Configure miss: python3.8/Python.h presence
