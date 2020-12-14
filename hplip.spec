@@ -4,7 +4,7 @@
 #
 Name     : hplip
 Version  : 3.19.8.reduced
-Release  : 30
+Release  : 31
 URL      : http://localhost/cgit/projects/hplip/snapshot/hplip-3.19.8.reduced.tar.xz
 Source0  : http://localhost/cgit/projects/hplip/snapshot/hplip-3.19.8.reduced.tar.xz
 Summary  : HPLIP
