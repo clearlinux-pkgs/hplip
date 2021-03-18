@@ -4,7 +4,7 @@
 #
 Name     : hplip
 Version  : 3.19.8.reduced
-Release  : 36
+Release  : 37
 URL      : http://localhost/cgit/projects/hplip/snapshot/hplip-3.19.8.reduced.tar.xz
 Source0  : http://localhost/cgit/projects/hplip/snapshot/hplip-3.19.8.reduced.tar.xz
 Summary  : HPLIP
@@ -151,7 +151,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1597773843
+export SOURCE_DATE_EPOCH=1616102985
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -169,7 +169,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1597773843
+export SOURCE_DATE_EPOCH=1616102985
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/hplip
 cp %{_builddir}/hplip-3.19.8.reduced/COPYING %{buildroot}/usr/share/package-licenses/hplip/1424fcfa87a00f99343d19aad0a74293dea0a023

@@ -1,3 +1,4 @@
+Configure miss: g++ option to enable C++11 features
 Configure miss: hpijs only build
 Configure miss: lite build
 Configure miss: hpcups only build
@@ -17,4 +18,3 @@ Configure miss: foomatic-rip-hplip install
 Configure miss: qt4
 Configure miss: qt3
 Configure miss: policykit
-Configure miss: python3.8/Python.h presence
