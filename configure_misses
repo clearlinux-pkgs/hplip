@@ -1,20 +1,21 @@
+Configure miss: apparmor profile
+Configure miss: class driver
+Configure miss: cups 1.1.x build
+Configure miss: cups ppd install
+Configure miss: foomatic drv install
+Configure miss: foomatic ppd install
+Configure miss: foomatic-rip-hplip install
 Configure miss: g++ option to enable C++11 features
-Configure miss: hpijs only build
-Configure miss: lite build
 Configure miss: hpcups only build
 Configure miss: hpijs install
+Configure miss: hpijs only build
+Configure miss: libusb-0.1 build
+Configure miss: lite build
 Configure miss: new hpcups install
 Configure miss: parallel port build
-Configure miss: class driver
-Configure miss: apparmor profile
-Configure miss: cups 1.1.x build
-Configure miss: udev sysfs enable rules
-Configure miss: shadow build
-Configure miss: libusb-0.1 build
-Configure miss: foomatic ppd install
-Configure miss: foomatic drv install
-Configure miss: cups ppd install
-Configure miss: foomatic-rip-hplip install
-Configure miss: qt4
-Configure miss: qt3
 Configure miss: policykit
+Configure miss: qt3
+Configure miss: qt4
+Configure miss: shadow build
+Configure miss: udev sysfs enable rules
+Configure miss: x86_64-generic-linux-gnu-file
