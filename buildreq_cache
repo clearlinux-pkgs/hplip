@@ -1,7 +1,4 @@
-3.19.8.reduced
-buildreq-kde
+3.23.12.reduced.1
 libjpeg-turbo-dev
 openssl-dev
-pkgconfig(zlib)
 python3-dev
-zlib-dev

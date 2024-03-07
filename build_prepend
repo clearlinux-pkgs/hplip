@@ -1,3 +1,6 @@
 export CFLAGS="$CFLAGS $(python3-config --includes)"
 export CXXFLAGS="$CXXFLAGS $(python3-config --includes)"
 sed -i 's|^AM_INIT_AUTOMAKE|AM_INIT_AUTOMAKE([foreign])|g' configure.in
+
+# Recompress all the PPDs
+find . -type f -name '*.ppd' -exec gzip {} \;

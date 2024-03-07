@@ -1,3 +1,5 @@
+libavahi-client.so.3
+libavahi-common.so.3
 libc.so.6
 libcups.so.2
 libdbus-1.so.3
@@ -5,6 +7,7 @@ libgcc_s.so.1
 libjpeg.so.62
 libm.so.6
 libnetsnmp.so.40
+libpython3.12.so.1.0
 libsane.so.1
 libstdc++.so.6
 libusb-1.0.so.0
