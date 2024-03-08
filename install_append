@@ -6,3 +6,11 @@ mkdir -p %{buildroot}/usr/share/defaults/etc/hp
 install -m0644 hplip.conf %{buildroot}/usr/share/defaults/etc/hp/hplip.conf
 mkdir -p %{buildroot}/usr/share/defaults/sane/dll.d
 echo hpaio > %{buildroot}/usr/share/defaults/sane/dll.d/hpaio
+
+# Install udev rules for USB devices
+mkdir -p %{buildroot}/usr/lib/udev/rules.d
+mv %{buildroot}/etc/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
+
+# At least install the systray app desktop file, even if we don't autostart it
+mkdir -p %{buildroot}/usr/share/applications
+mv %{buildroot}/etc/xdg/autostart/* %{buildroot}/usr/share/applications/

@@ -7,19 +7,21 @@
 #
 Name     : hplip
 Version  : 3.23.12.reduced.1
-Release  : 50
+Release  : 51
 URL      : http://localhost/cgit/projects/hplip/snapshot/hplip-3.23.12.reduced-1.tar.xz
 Source0  : http://localhost/cgit/projects/hplip/snapshot/hplip-3.23.12.reduced-1.tar.xz
 Summary  : HPLIP
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 MIT
 Requires: hplip-bin = %{version}-%{release}
+Requires: hplip-config = %{version}-%{release}
 Requires: hplip-data = %{version}-%{release}
 Requires: hplip-lib = %{version}-%{release}
 Requires: hplip-license = %{version}-%{release}
 Requires: hplip-python = %{version}-%{release}
 Requires: hplip-python3 = %{version}-%{release}
 Requires: hplip-services = %{version}-%{release}
+Requires: PyQt5
 Requires: dbus-python
 BuildRequires : PyQt5
 BuildRequires : buildreq-configure
@@ -132,11 +134,20 @@ The Independent JPEG Group's JPEG software
 Summary: bin components for the hplip package.
 Group: Binaries
 Requires: hplip-data = %{version}-%{release}
+Requires: hplip-config = %{version}-%{release}
 Requires: hplip-license = %{version}-%{release}
 Requires: hplip-services = %{version}-%{release}
 
 %description bin
 bin components for the hplip package.
+
+
+%package config
+Summary: config components for the hplip package.
+Group: Default
+
+%description config
+config components for the hplip package.
 
 
 %package data
@@ -316,7 +327,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1709852845
+export SOURCE_DATE_EPOCH=1709857758
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -353,7 +364,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1709852845
+export SOURCE_DATE_EPOCH=1709857758
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/hplip
 cp %{_builddir}/hplip-3.23.12.reduced-1/COPYING %{buildroot}/usr/share/package-licenses/hplip/1424fcfa87a00f99343d19aad0a74293dea0a023 || :
@@ -370,6 +381,14 @@ mkdir -p %{buildroot}/usr/share/defaults/etc/hp
 install -m0644 hplip.conf %{buildroot}/usr/share/defaults/etc/hp/hplip.conf
 mkdir -p %{buildroot}/usr/share/defaults/sane/dll.d
 echo hpaio > %{buildroot}/usr/share/defaults/sane/dll.d/hpaio
+
+# Install udev rules for USB devices
+mkdir -p %{buildroot}/usr/lib/udev/rules.d
+mv %{buildroot}/etc/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
+
+# At least install the systray app desktop file, even if we don't autostart it
+mkdir -p %{buildroot}/usr/share/applications
+mv %{buildroot}/etc/xdg/autostart/* %{buildroot}/usr/share/applications/
 ## install_append end
 
 %files
@@ -423,9 +442,14 @@ echo hpaio > %{buildroot}/usr/share/defaults/sane/dll.d/hpaio
 /usr/bin/hp-upgrade
 /usr/bin/hp-wificonfig
 
+%files config
+%defattr(-,root,root,-)
+/usr/lib/udev/rules.d/56-hpmud.rules
+
 %files data
 %defattr(-,root,root,-)
 /usr/share/applications/hp-uiscan.desktop
+/usr/share/applications/hplip-systray.desktop
 /usr/share/applications/hplip.desktop
 /usr/share/cups/drv/hp/hpcups.drv
 /usr/share/cups/mime/pstotiff.convs
