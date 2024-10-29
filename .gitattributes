@@ -1,1 +1,2 @@
 backport-hplip-orblite-gcc14.patch -text
+backport-hplip-scan-orblite-c99.patch -text
