@@ -7,7 +7,7 @@
 #
 Name     : hplip
 Version  : 3.23.12.reduced.1
-Release  : 51
+Release  : 52
 URL      : http://localhost/cgit/projects/hplip/snapshot/hplip-3.23.12.reduced-1.tar.xz
 Source0  : http://localhost/cgit/projects/hplip/snapshot/hplip-3.23.12.reduced-1.tar.xz
 Summary  : HPLIP
