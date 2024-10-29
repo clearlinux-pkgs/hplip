@@ -1,0 +1,18 @@
+/etc/:
+/etc/hp:
+/etc/sane.d:
+/etc/udev/rules.d:
+/etc/udev:
+/etc/xdg/autostart:
+/etc/xdg:
+autostart
+dll.conf
+hp
+hplip.conf
+rules.d
+sane.d
+sane.d
+udev
+udev
+xdg
+xdg' ']'

@@ -82,5 +82,11 @@ debian-0079-Workaround-Add-32-bytes-to-allocation-Halftoner.patch
 debian-0080-Workaround-Add-32-bytes-to-allocation-Compressor.patch
 debian-0081-Don-t-start-hp-systray-in-GNOME.patch
 debian-0082-Some-of-the-print-modes-for-DeskJet-815C-are-incorre.patch
-fedora-hplip-no-readfp.patch
 9999-Fix-invalid-escape-sequences.patch
+backport-hplip-orblite-gcc14.patch
+backport-hplip-pserror-c99.patch
+backport-hplip-scan-hpaio-include.patch
+backport-hplip-scan-orblite-c99.patch
+backport-hplip-sclpml-strcasestr.patch
+0002-Fix-call-to-orblite_get_devices.patch
+0003-Define-CONFDIR-in-missed-places.patch

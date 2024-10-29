@@ -1,0 +1,28 @@
+From 58d5b8fe598c9cad7685736a8bbeea7afe6babe2 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Tue, 29 Oct 2024 14:30:40 -0700
+Subject: [PATCH] Define CONFDIR in missed places
+
+---
+ Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index b77327f5a48d..623e26d3a0f4 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -76,1 +76,1 @@
+-libsane_hpaio_la_CFLAGS = $(DBUS_CFLAGS) -Iprotocol
++libsane_hpaio_la_CFLAGS = -DCONFDIR=\"$(hplip_confdir)\" $(DBUS_CFLAGS) -Iprotocol
+@@ -538,1 +538,1 @@
+-libapdk_la_CFLAGS = $(libapdk_la_CXXFLAGS) -Iprnt/hpijs
++libapdk_la_CFLAGS = $(libapdk_la_CXXFLAGS) -DCONFDIR=\"$(hplip_confdir)\" -Iprnt/hpijs
+@@ -599,1 +599,2 @@ hpcups_SOURCES = prnt/hpcups/HPCupsFilter.cpp prnt/hpcups/HPCupsFilter.h prnt/hp
+ hpcups_CXXFLAGS = $(APDK_ENDIAN_FLAG) $(DBUS_CFLAGS)
++hpcups_CFLAGS = -DCONFDIR=\"$(hplip_confdir)\"
+@@ -621,1 +622,2 @@
++hpcupsfax_CFLAGS = -DCONFDIR=\"$(hplip_confdir)\"
+ hpcupsfax_LDADD = libhpip.la -lcups -lcupsimage -ldl
+-- 
+2.47.0
+

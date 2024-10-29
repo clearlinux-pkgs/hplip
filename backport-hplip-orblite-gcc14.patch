@@ -1,0 +1,19 @@
+diff -Nru hplip-3.23.12.orig/scan/sane/orblite.c hplip-3.23.12/scan/sane/orblite.c
+--- hplip-3.23.12.orig/scan/sane/orblite.c	2023-11-27 15:06:41.000000000 +0000
++++ hplip-3.23.12/scan/sane/orblite.c	2024-06-06 07:45:19.037962804 +0000
+@@ -19,10 +19,15 @@
+ #undef NDEBUG
+ #include "orblitei.h"
+ #include "orblite.h"//Added New
++#include <dlfcn.h>
+ #include <math.h>
+ #include "utils.h"
+ #include "io.h"
+ 
++
++#define DEBUG_DECLARE_ONLY
++#include "sanei_debug.h"
++
+ #ifdef __cplusplus
+  }
+ #endif 

@@ -1,0 +1,25 @@
+From 511c54a211a227a605c3c8ad7fa6a0036dd6a183 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Tue, 29 Oct 2024 11:25:19 -0700
+Subject: [PATCH] Fix call to orblite_get_devices
+
+---
+ scan/sane/hpaio.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scan/sane/hpaio.c b/scan/sane/hpaio.c
+index 62d14eb11f70..d87c8bb4ae73 100644
+--- a/scan/sane/hpaio.c
++++ b/scan/sane/hpaio.c
+@@ -378,7 +378,7 @@ extern SANE_Status sane_hpaio_get_devices(const SANE_Device ***deviceList, SANE_
+    ResetDeviceList(&DeviceList);
+    DevDiscovery(localOnly);
+    *deviceList = (const SANE_Device **)DeviceList;
+-   SANE_Device*** devList;
++   const SANE_Device*** devList;
+    orblite_get_devices(devList, localOnly);
+ 
+    return SANE_STATUS_GOOD;
+-- 
+2.47.0
+
