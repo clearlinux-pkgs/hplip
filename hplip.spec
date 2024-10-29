@@ -7,7 +7,7 @@
 #
 Name     : hplip
 Version  : 3.24.4.reduced
-Release  : 54
+Release  : 55
 URL      : http://localhost/cgit/projects/hplip/snapshot/hplip-v3.24.4.reduced.tar.bz2
 Source0  : http://localhost/cgit/projects/hplip/snapshot/hplip-v3.24.4.reduced.tar.bz2
 Summary  : HPLIP
